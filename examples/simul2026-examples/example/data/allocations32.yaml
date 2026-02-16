@@ -1,0 +1,167 @@
+allocations:
+  vms:
+  -   id: c5.2xlarge-14
+      instance_class: c5.2xlarge
+  -   id: c5.12xlarge-1
+      instance_class: c5.12xlarge
+  -   id: c5.12xlarge-3
+      instance_class: c5.12xlarge
+  -   id: c5.12xlarge-6
+      instance_class: c5.12xlarge
+  -   id: c5.12xlarge-7
+      instance_class: c5.12xlarge
+  -   id: c5.18xlarge-2
+      instance_class: c5.18xlarge
+  -   id: c5.24xlarge-4
+      instance_class: c5.24xlarge
+  containers:
+  -   id: c5.2xlarge-14-app_1_c5_m5_r5_1
+      vm: c5.2xlarge-14
+      class: app_1_c5_m5_r5_1
+      image: unknown
+      replicas: 28
+  -   id: c5.2xlarge-14-app_3_c5_m5_r5_1
+      vm: c5.2xlarge-14
+      class: app_3_c5_m5_r5_1
+      image: unknown
+      replicas: 1
+  -   id: c5.12xlarge-1-app_0_c5_m5_r5_4
+      vm: c5.12xlarge-1
+      class: app_0_c5_m5_r5_4
+      image: unknown
+      replicas: 33
+  -   id: c5.12xlarge-1-app_2_c5_m5_r5_1
+      vm: c5.12xlarge-1
+      class: app_2_c5_m5_r5_1
+      image: unknown
+      replicas: 2
+  -   id: c5.12xlarge-1-app_2_c5_m5_r5_4
+      vm: c5.12xlarge-1
+      class: app_2_c5_m5_r5_4
+      image: unknown
+      replicas: 22
+  -   id: c5.12xlarge-3-app_0_c5_m5_r5_2
+      vm: c5.12xlarge-3
+      class: app_0_c5_m5_r5_2
+      image: unknown
+      replicas: 1
+  -   id: c5.12xlarge-3-app_1_c5_m5_r5_1
+      vm: c5.12xlarge-3
+      class: app_1_c5_m5_r5_1
+      image: unknown
+      replicas: 5
+  -   id: c5.12xlarge-3-app_1_c5_m5_r5_2
+      vm: c5.12xlarge-3
+      class: app_1_c5_m5_r5_2
+      image: unknown
+      replicas: 1
+  -   id: c5.12xlarge-3-app_2_c5_m5_r5_1
+      vm: c5.12xlarge-3
+      class: app_2_c5_m5_r5_1
+      image: unknown
+      replicas: 211
+  -   id: c5.12xlarge-6-app_0_c5_m5_r5_1
+      vm: c5.12xlarge-6
+      class: app_0_c5_m5_r5_1
+      image: unknown
+      replicas: 205
+  -   id: c5.12xlarge-6-app_0_c5_m5_r5_8
+      vm: c5.12xlarge-6
+      class: app_0_c5_m5_r5_8
+      image: unknown
+      replicas: 1
+  -   id: c5.12xlarge-6-app_1_c5_m5_r5_1
+      vm: c5.12xlarge-6
+      class: app_1_c5_m5_r5_1
+      image: unknown
+      replicas: 3
+  -   id: c5.12xlarge-6-app_1_c5_m5_r5_2
+      vm: c5.12xlarge-6
+      class: app_1_c5_m5_r5_2
+      image: unknown
+      replicas: 2
+  -   id: c5.12xlarge-7-app_2_c5_m5_r5_1
+      vm: c5.12xlarge-7
+      class: app_2_c5_m5_r5_1
+      image: unknown
+      replicas: 222
+  -   id: c5.18xlarge-2-app_0_c5_m5_r5_1
+      vm: c5.18xlarge-2
+      class: app_0_c5_m5_r5_1
+      image: unknown
+      replicas: 232
+  -   id: c5.18xlarge-2-app_0_c5_m5_r5_2
+      vm: c5.18xlarge-2
+      class: app_0_c5_m5_r5_2
+      image: unknown
+      replicas: 2
+  -   id: c5.18xlarge-2-app_0_c5_m5_r5_8
+      vm: c5.18xlarge-2
+      class: app_0_c5_m5_r5_8
+      image: unknown
+      replicas: 1
+  -   id: c5.18xlarge-2-app_1_c5_m5_r5_1
+      vm: c5.18xlarge-2
+      class: app_1_c5_m5_r5_1
+      image: unknown
+      replicas: 4
+  -   id: c5.18xlarge-2-app_2_c5_m5_r5_2
+      vm: c5.18xlarge-2
+      class: app_2_c5_m5_r5_2
+      image: unknown
+      replicas: 3
+  -   id: c5.18xlarge-2-app_2_c5_m5_r5_4
+      vm: c5.18xlarge-2
+      class: app_2_c5_m5_r5_4
+      image: unknown
+      replicas: 1
+  -   id: c5.18xlarge-2-app_4_c5_m5_r5_1
+      vm: c5.18xlarge-2
+      class: app_4_c5_m5_r5_1
+      image: unknown
+      replicas: 38
+  -   id: c5.18xlarge-2-app_4_c5_m5_r5_4
+      vm: c5.18xlarge-2
+      class: app_4_c5_m5_r5_4
+      image: unknown
+      replicas: 1
+  -   id: c5.18xlarge-2-app_4_c5_m5_r5_8
+      vm: c5.18xlarge-2
+      class: app_4_c5_m5_r5_8
+      image: unknown
+      replicas: 2
+  -   id: c5.24xlarge-4-app_0_c5_m5_r5_1
+      vm: c5.24xlarge-4
+      class: app_0_c5_m5_r5_1
+      image: unknown
+      replicas: 24
+  -   id: c5.24xlarge-4-app_0_c5_m5_r5_2
+      vm: c5.24xlarge-4
+      class: app_0_c5_m5_r5_2
+      image: unknown
+      replicas: 1
+  -   id: c5.24xlarge-4-app_0_c5_m5_r5_4
+      vm: c5.24xlarge-4
+      class: app_0_c5_m5_r5_4
+      image: unknown
+      replicas: 2
+  -   id: c5.24xlarge-4-app_2_c5_m5_r5_2
+      vm: c5.24xlarge-4
+      class: app_2_c5_m5_r5_2
+      image: unknown
+      replicas: 46
+  -   id: c5.24xlarge-4-app_3_c5_m5_r5_2
+      vm: c5.24xlarge-4
+      class: app_3_c5_m5_r5_2
+      image: unknown
+      replicas: 156
+  -   id: c5.24xlarge-4-app_4_c5_m5_r5_1
+      vm: c5.24xlarge-4
+      class: app_4_c5_m5_r5_1
+      image: unknown
+      replicas: 1
+  -   id: c5.24xlarge-4-app_4_c5_m5_r5_4
+      vm: c5.24xlarge-4
+      class: app_4_c5_m5_r5_4
+      image: unknown
+      replicas: 1

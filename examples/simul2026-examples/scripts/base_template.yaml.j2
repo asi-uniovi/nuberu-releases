@@ -1,0 +1,105 @@
+config_version: "3.2"
+simulation:
+  seed: {{ seed | default(12345) }}
+  stop_time: {{ stop_time | default(3600) }}
+  eager_start: true
+  drain_pending_requests: {{ drain_pending_requests | lower }}
+
+# Network delays (v3.2) - configurable latencies between components
+# Set to 0 by default for baseline experiments (no network delay)
+network_delays:
+  wi_to_lb: {{ wi_to_lb_delay | default(0) }}
+  lb_to_vm_default: {{ lb_to_vm_delay | default(0) }}
+  vm_container_overhead: {{ vm_container_overhead | default(0) }}
+{% if vm_overrides is defined %}
+  vm_overrides:
+{% for vm_name, delays in vm_overrides.items() %}
+    {{ vm_name }}:
+      forward: {{ delays.forward }}
+      backward: {{ delays.backward }}
+{% endfor %}
+{% endif %}
+{% if workload_overrides is defined %}
+  workload_overrides:
+{% for app_name, delays in workload_overrides.items() %}
+    {{ app_name }}:
+      wi_to_lb: {{ delays.wi_to_lb }}
+      wi_to_lb_backward: {{ delays.wi_to_lb_backward | default(delays.wi_to_lb) }}
+{% endfor %}
+{% endif %}
+
+logging:
+  log_to_file: true
+  log_to_console: false
+  level: critical
+  component_levels:
+    plugins.monitor_simple: critical
+    plugins.report_generator: info
+    plugins.cost_spot: debug
+    components.monitor: critical
+  output_path: ../logs/
+  log_file_name: "{{ log_file_name }}"
+
+# Custom plugins (v3.2)
+# - monitor_simple: Dumps raw request events to JSONL (for post-hoc analysis)
+# - report_generator: Generates summary report at simulation end
+custom_plugins:
+  - plugin_name: monitor_simple
+    plugin_config:
+      dump_file: ../metrics/{{ scenario_name }}.jsonl
+
+  - plugin_name: report_generator
+    plugin_config:
+      output_format: "jsonl"
+      output_path: "../reports/{{ scenario_name }}_report"
+
+infrastructure:
+  plugin_name: conlloovia
+  plugin_config:
+    pickle_path: "{{ pickle_path }}"
+
+runtime_model:
+  plugin_name: simple
+  plugin_config:
+    queue_size: {{ queue_size }}
+
+performance_data:
+  plugin_name: conlloovia
+  plugin_config:
+    pickle_path: "{{ pickle_path }}"
+
+allocation:
+  plugin_name: "conlloovia"
+  plugin_config:
+    pickle_path: "{{ pickle_path }}"
+
+workloads:
+{% if workload_type == 'trace' %}
+  {% for i in range(num_apps) %}
+  - app: app{{ i }}
+    distribution:
+      plugin_name: poisson_dynamic
+      plugin_config:
+        rate_file_path: {{ app_csvs[i] }}
+        injecting_end_time: 3600
+        csv_offset: {{ csv_offset }}
+  {% endfor %}
+{% elif workload_type == 'poisson' %}
+  {% for i in range(num_apps) %}
+  - app: app{{ i }}
+    distribution:
+      plugin_name: poisson
+      plugin_config:
+        num_reqs: {{ poisson_reqs[i] }}
+        time_slot_size: 3600
+  {% endfor %}
+{% endif %}
+
+load_balancer:
+  plugin_name: "{{ load_balancer }}"
+  plugin_config: {{ load_balancer_config }}
+
+cost_models:
+  - plugin_name: "spot"
+    plugin_config:
+      price_per_hour: 0.05

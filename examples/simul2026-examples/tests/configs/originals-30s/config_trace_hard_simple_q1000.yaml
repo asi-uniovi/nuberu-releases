@@ -1,0 +1,44 @@
+simulation:
+  seed: 12345
+  stop_time: 30
+  eager_start: true
+  drain_pending_requests: false
+logging:
+  log_to_file: true
+  level: DEBUG
+  output_path: ../logs/
+  log_file_name: log_trace_hard_simple_q1000.log
+monitoring:
+  export_metrics: true
+  format: csv
+  output_path: ../metrics/
+  scenario: trace_hard_simple_q1000
+allocation:
+  plugin_name: conlloovia
+  pickle_path: ../example/data/sol_conlloovia_1_hour_a_2_static_unpredictable_ts_9.p
+  using_plugin: true
+workloads:
+- app: app0
+  distribution:
+    plugin_name: poisson_dynamic
+    injecting_end_time: 3600
+    csv_offset: 32400
+    rate_file_path: ../example/data/wl_static_1s.csv
+- app: app1
+  distribution:
+    plugin_name: poisson_dynamic
+    injecting_end_time: 3600
+    csv_offset: 32400
+    rate_file_path: ../example/data/wl_unpredictable_1s.csv
+load_balancer:
+  plugin_name: simple
+cost_models:
+- name: spot
+  price_per_hour: 0.05
+performance_model:
+  plugin_name: DefaultPerformanceModel
+  queue_size: 1000
+performance_data:
+  plugin_name: conlloovia
+  pickle_path: ../example/data/sol_conlloovia_1_hour_a_2_static_unpredictable_ts_9.p
+  using_plugin: true

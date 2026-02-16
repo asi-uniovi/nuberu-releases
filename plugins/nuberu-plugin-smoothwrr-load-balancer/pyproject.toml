@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nuberu_plugin_SmoothWRR_load_balancer"
+version = "0.3.0"
+description = "A smart Smooth Weighted Round Robin (SWRR) LoadBalancer plugin for Nuberu"
+authors = [{ name = "Ruben", email = "luqueruben@uniovi.es" }]
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "nuberu",
+]
+
+[tool.uv.sources]
+nuberu = { workspace = true }
+
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.entry-points."nuberu"]
+"load_balancer.smoothWRR" = "nuberu_plugin_SmoothWRR_load_balancer.plugin:LoadBalancerSmoothWRRPlugin"
+

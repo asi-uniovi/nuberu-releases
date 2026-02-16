@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nuberu-plugin-conlloovia-data-provider"
+version = "0.3.0"
+description = "Data provider conlloovia plugin for nuberu"
+authors = [{ name = "Ruben", email = "luqueruben@uniovi.es" }]
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "nuberu",
+    "conlloovia",
+]
+
+[tool.uv.sources]
+nuberu = { workspace = true }
+conlloovia = { git = "https://github.com/asi-uniovi/conlloovia.git", rev = "c331659795a70ebf3803f58feb4ffb6abf2a2547" }
+
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.entry-points."nuberu"]
+"infrastructure.conlloovia" = "nuberu_plugin_conlloovia_data_provider.plugin:ConllooviaDataProvider"
+"allocation.conlloovia" = "nuberu_plugin_conlloovia_data_provider.plugin:ConllooviaDataProvider"
+"performance.conlloovia" = "nuberu_plugin_conlloovia_data_provider.plugin:ConllooviaDataProvider"
+"workload.conlloovia" = "nuberu_plugin_conlloovia_data_provider.plugin:ConllooviaDataProvider"
+

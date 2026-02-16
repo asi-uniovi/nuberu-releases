@@ -1,0 +1,77 @@
+[project]
+name = "nuberu"
+version = "0.3.2"
+description = "Core simulation engine"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "asimpy",
+    "colorama>=0.4.6",
+    "pyyaml>=6.0.2",
+    "pluggy>=1.5.0",
+    "pydantic>=2.11.7",    
+    "click>=8.1.8",
+    "click-aliases>=1.0.0",    
+]
+
+[project.optional-dependencies]
+solver = ["pulp>=2.0"] 
+malloovia = ["malloovia>=2.3.2"]
+cloudmodel = ["cloudmodel"]
+fcma = ["fcma"]
+conlloovia = ["conlloovia"]
+
+# --- BUILD SYSTEM (Adapted to src-layout y Hatchling) ---
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/nuberu"]
+
+# --- SOURCES FOR UV (Copied from original) ---
+[tool.uv.sources]
+asimpy = { git = "https://github.com/jldiaz-uniovi/asimpy.git" }
+cloudmodel = { git = "https://github.com/asi-uniovi/cloudmodel.git", rev="045eae5f04a31786d29f4cb55271e1b47b42bfd4" }
+malloovia = { git = "https://github.com/asi-uniovi/malloovia.git", rev = "relax_pulp_version" }
+fcma = { git = "https://github.com/asi-uniovi/fcma.git", rev = "jld/feat-uv" }
+conlloovia = { git = "https://github.com/asi-uniovi/conlloovia.git", rev = "c331659795a70ebf3803f58feb4ffb6abf2a2547" }
+
+[dependency-groups]
+dev = [
+  "pytest >=7.0",
+  "pytest-cov >=4.0.0,<5",
+  "pytest-asyncio >=0.24.0,<1",
+  "tox >=4.0.0,<5",
+  "mypy >=1.15.0,<2",
+  "types-pyyaml>=6.0.12.20241230",
+  "cloudmodel"
+]
+lint = [
+  "ruff >=0.9.7,<1",
+]
+
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+extend-select = ["I"]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+disallow_untyped_defs = true
+strict_optional = true
+warn_unused_ignores = true
+warn_return_any = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+pythonpath = ["src"]
+
+[tool.coverage.run]
+omit = [
+    "src/nuberu/scripts/*" 
+]

@@ -1,0 +1,64 @@
+config_version: "2.1"
+
+simulation:
+  seed: 12345
+  stop_time: 0.1
+  eager_start: true
+  drain_pending_requests: true
+  allocator_interval: 250
+
+logging:
+  log_to_file: false
+  log_to_console: false
+  level: none
+  output_path: ../logs/
+  log_file_name: log_poisson_drain_simple_q0.log
+
+allocation:
+  plugin_name: conlloovia
+  plugin_config:
+    pickle_path: ../../../examples/simul2026-examples/example/data/sol_conlloovia_1_hour_a_2_static_unpredictable_ts_9.p
+    # yaml_path: ../example/data/allocations32.yaml
+    using_plugin: true
+
+workloads:
+- app: app0
+  distribution:
+    plugin_name: poisson
+    plugin_config:
+      num_reqs: 124427
+      time_slot_size: 3600
+- app: app1
+  distribution:
+    plugin_name: poisson
+    plugin_config:
+      num_reqs: 362587
+      time_slot_size: 3600
+
+load_balancer:
+  plugin_name: simple
+  plugin_config: {}
+
+cost_models:
+- plugin_name: spot
+  plugin_config:
+    price_per_hour: 0.05
+
+runtime_model:
+  plugin_name: simple
+  plugin_config:
+    queue_size: 0
+
+performance_data:
+  plugin_name: conlloovia
+  plugin_config:
+    pickle_path: ../../../examples/simul2026-examples/example/data/sol_conlloovia_1_hour_a_2_static_unpredictable_ts_9.p
+    # yaml_path: ../example/data/performance_data32.yaml
+    using_plugin: true
+
+infrastructure:
+  plugin_name: conlloovia
+  plugin_config:
+    pickle_path: ../../../examples/simul2026-examples/example/data/sol_conlloovia_1_hour_a_2_static_unpredictable_ts_9.p
+    yaml_path: ../../../examples/simul2026-examples/example/data/infrastructure32.yaml
+    using_plugin: true

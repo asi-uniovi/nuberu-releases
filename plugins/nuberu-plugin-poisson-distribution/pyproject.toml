@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nuberu-plugin-poisson-distribution"
+version = "0.3.0"
+description = "Poisson distribution plugin for nuberu"
+authors = [{ name = "Ruben", email = "luqueruben@uniovi.es" }]
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "nuberu",
+]
+
+[tool.uv.sources]
+nuberu = { workspace = true }
+
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "pytest>=8.4.1",
+]
+
+[project.entry-points."nuberu"]
+"distribution.poisson" = "nuberu_plugin_poisson_distribution.plugin:PoissonDistribution"
+

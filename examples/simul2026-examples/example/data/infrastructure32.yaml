@@ -1,0 +1,204 @@
+
+infrastructure:
+  instance_classes:
+  -   name: c5.large
+      cores: 1
+      mem: 4
+      price: 0.096
+      limit: 191
+  -   name: c5.xlarge
+      cores: 2
+      mem: 8
+      price: 0.192
+      limit: 97
+  -   name: c5.2xlarge
+      cores: 4
+      mem: 16
+      price: 0.384
+      limit: 48
+  -   name: c5.4xlarge
+      cores: 8
+      mem: 32
+      price: 0.768
+      limit: 26
+  -   name: c5.9xlarge
+      cores: 18
+      mem: 72
+      price: 1.728
+      limit: 12
+  -   name: c5.12xlarge
+      cores: 24
+      mem: 96
+      price: 2.3040000000000003
+      limit: 10
+  -   name: c5.18xlarge
+      cores: 36
+      mem: 144
+      price: 3.456
+      limit: 7
+  -   name: c5.24xlarge
+      cores: 48
+      mem: 192
+      price: 4.6080000000000005
+      limit: 7
+  -   name: m5.large
+      cores: 1
+      mem: 8
+      price: 0.107
+      limit: 191
+  -   name: m5.xlarge
+      cores: 2
+      mem: 16
+      price: 0.214
+      limit: 97
+  -   name: m5.2xlarge
+      cores: 4
+      mem: 32
+      price: 0.428
+      limit: 48
+  -   name: m5.4xlarge
+      cores: 8
+      mem: 64
+      price: 0.856
+      limit: 26
+  -   name: m5.9xlarge
+      cores: 18
+      mem: 144
+      price: 1.926
+      limit: 12
+  -   name: m5.12xlarge
+      cores: 24
+      mem: 192
+      price: 2.568
+      limit: 10
+  -   name: m5.18xlarge
+      cores: 36
+      mem: 288
+      price: 3.852
+      limit: 7
+  -   name: m5.24xlarge
+      cores: 48
+      mem: 384
+      price: 5.136
+      limit: 7
+  -   name: r5.large
+      cores: 1
+      mem: 16
+      price: 0.141
+      limit: 191
+  -   name: r5.xlarge
+      cores: 2
+      mem: 32
+      price: 0.282
+      limit: 97
+  -   name: r5.2xlarge
+      cores: 4
+      mem: 64
+      price: 0.564
+      limit: 48
+  -   name: r5.4xlarge
+      cores: 8
+      mem: 128
+      price: 1.128
+      limit: 26
+  -   name: r5.9xlarge
+      cores: 18
+      mem: 288
+      price: 2.538
+      limit: 12
+  -   name: r5.12xlarge
+      cores: 24
+      mem: 384
+      price: 3.3839999999999995
+      limit: 10
+  -   name: r5.18xlarge
+      cores: 36
+      mem: 576
+      price: 5.076
+      limit: 7
+  -   name: r5.24xlarge
+      cores: 48
+      mem: 768
+      price: 6.767999999999999
+      limit: 7
+  container_classes:
+  -   name: app_0_c5_m5_r5_1
+      cores: 0.108
+      mem: 0.216
+      app: app_0
+  -   name: app_0_c5_m5_r5_2
+      cores: 0.216
+      mem: 0.216
+      app: app_0
+  -   name: app_0_c5_m5_r5_4
+      cores: 0.432
+      mem: 0.216
+      app: app_0
+  -   name: app_0_c5_m5_r5_8
+      cores: 0.864
+      mem: 0.216
+      app: app_0
+  -   name: app_1_c5_m5_r5_1
+      cores: 0.13799999999999998
+      mem: 0.24839999999999998
+      app: app_1
+  -   name: app_1_c5_m5_r5_2
+      cores: 0.27599999999999997
+      mem: 0.24839999999999998
+      app: app_1
+  -   name: app_1_c5_m5_r5_4
+      cores: 0.5519999999999999
+      mem: 0.24839999999999998
+      app: app_1
+  -   name: app_1_c5_m5_r5_8
+      cores: 1.1039999999999999
+      mem: 0.24839999999999998
+      app: app_1
+  -   name: app_2_c5_m5_r5_1
+      cores: 0.108
+      mem: 0.24839999999999998
+      app: app_2
+  -   name: app_2_c5_m5_r5_2
+      cores: 0.216
+      mem: 0.24839999999999998
+      app: app_2
+  -   name: app_2_c5_m5_r5_4
+      cores: 0.432
+      mem: 0.24839999999999998
+      app: app_2
+  -   name: app_2_c5_m5_r5_8
+      cores: 0.864
+      mem: 0.24839999999999998
+      app: app_2
+  -   name: app_3_c5_m5_r5_1
+      cores: 0.108
+      mem: 0.24839999999999998
+      app: app_3
+  -   name: app_3_c5_m5_r5_2
+      cores: 0.216
+      mem: 0.24839999999999998
+      app: app_3
+  -   name: app_3_c5_m5_r5_4
+      cores: 0.432
+      mem: 0.24839999999999998
+      app: app_3
+  -   name: app_3_c5_m5_r5_8
+      cores: 0.864
+      mem: 0.24839999999999998
+      app: app_3
+  -   name: app_4_c5_m5_r5_1
+      cores: 0.13799999999999998
+      mem: 0.31739999999999996
+      app: app_4
+  -   name: app_4_c5_m5_r5_2
+      cores: 0.27599999999999997
+      mem: 0.31739999999999996
+      app: app_4
+  -   name: app_4_c5_m5_r5_4
+      cores: 0.5519999999999999
+      mem: 0.31739999999999996
+      app: app_4
+  -   name: app_4_c5_m5_r5_8
+      cores: 1.1039999999999999
+      mem: 0.31739999999999996
+      app: app_4

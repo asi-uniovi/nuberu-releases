@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nuberu_plugin_custom_monitor"
+version = "0.1.0"
+description = "Custom Monitor Plugin for nuberu"
+authors = [{ name = "JL Diaz", email = "jldiaz@uniovi.es" }]
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "nuberu",
+]
+
+[tool.uv.sources]
+nuberu = { workspace = true }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.entry-points."nuberu"]
+"custom.monitor_simple" = "nuberu_plugin_custom_monitor.plugin:CustomSimpleMonitorPlugin"

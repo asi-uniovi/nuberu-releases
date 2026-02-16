@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nuberu-plugin-uniform-distribution"
+version = "0.1.0"
+description = "Uniform distribution plugin for nuberu"
+authors = [{ name = "Ruben", email = "luqueruben@uniovi.es" }]
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "nuberu",
+]
+
+[tool.uv.sources]
+nuberu = { workspace = true }
+
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.entry-points."nuberu"]
+"distribution.uniform" = "nuberu_plugin_uniform_distribution.plugin:UniformDistribution"
+

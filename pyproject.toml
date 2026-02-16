@@ -1,0 +1,65 @@
+[project]
+name = "nuberu-ecosystem"
+version = "0.3.0"
+description = "Monorepo for Nuberu simulation engine and plugins"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.uv.workspace]
+members = [
+    "core",
+    "plugins/nuberu-plugin-*"
+]
+
+[tool.uv]
+override-dependencies = [
+    "pint>=0.24.4"
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-cov >=4.0.0,<5",
+    "pytest-asyncio >=0.24.0,<1",
+    "pandas",
+    "pyarrow",
+    "nuberu",
+    "ruff",
+    "nuberu-plugin-conlloovia-data-provider",
+    "nuberu-plugin-cost-spot",
+    "nuberu-plugin-fcma-data-provider",
+    "nuberu-plugin-load-balancer",
+    "nuberu-plugin-poisson-distribution",
+    "nuberu-plugin-poisson-dynamic-distribution",
+    "nuberu-plugin-runtime-model-simple",
+    "nuberu-plugin-smoothwrr-load-balancer",
+    "nuberu-plugin-uniform-distribution",
+    "nuberu-plugin-example-custom",
+    "nuberu-plugin-weighted-load-balancer",
+    "nuberu-plugin-custom-monitor",
+    "nuberu-plugin-report-generator"
+]
+
+[tool.uv.sources]
+nuberu = { workspace = true }
+nuberu-plugin-conlloovia-data-provider = { workspace = true }
+nuberu-plugin-cost-spot = { workspace = true }
+nuberu-plugin-fcma-data-provider = { workspace = true }
+nuberu-plugin-load-balancer = { workspace = true }
+nuberu-plugin-poisson-distribution = { workspace = true }
+nuberu-plugin-poisson-dynamic-distribution = { workspace = true }
+nuberu-plugin-runtime-model-simple = { workspace = true }
+nuberu-plugin-smoothwrr-load-balancer = { workspace = true }
+nuberu-plugin-uniform-distribution = { workspace = true }
+nuberu-plugin-weighted-load-balancer = { workspace = true }
+nuberu-plugin-example-custom = { workspace = true }
+nuberu-plugin-custom-monitor = { workspace = true }
+nuberu-plugin-report-generator = { workspace = true }
+
+
+[tool.pytest.ini_options]
+addopts = "--import-mode=importlib"
+testpaths = [
+    "core",
+    "plugins",
+]

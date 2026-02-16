@@ -1,0 +1,59 @@
+# pyproject.toml
+
+[project]
+name = "nuberu-simul2026-examples"
+version = "0.1.0"
+requires-python = ">=3.11,<3.14"
+
+# List of direct dependencies required to run the examples.
+# 'uv sync' will install these.
+# The names here must match package names on PyPI or keys in `[tool.uv.sources]`.
+dependencies = [
+    "nuberu", # Core Nuberu framework
+    # Data Provider contains hooks for Infrastructure, PerformanceData and Allocations.
+    "nuberu-plugin-conlloovia-data-provider", # Conlloovia data provider plugin  (local)
+    "nuberu-plugin-fcma-data-provider", # FCMA data provider plugin (local)
+    "nuberu-plugin-cost-spot", # Cost plugin (local)
+    "nuberu-plugin-load-balancer", # Load balancer plugin (local)
+    "nuberu-plugin-weighted-load-balancer", # Weighted load balancer plugin (local)
+    "nuberu-plugin-uniform-distribution", # Uniform distribution plugin (local)
+    "nuberu-plugin-poisson-distribution", # Poisson distribution plugin (local)
+    "nuberu-plugin-poisson-dynamic-distribution", # Poisson dynamic distribution plugin (local)
+    "nuberu-plugin-smoothwrr-load-balancer", # Smooth Weighted Round Robin Load Balancer plugin (local)
+    "nuberu-plugin-runtime-model-simple", # Simple runtime model plugin (local)
+    "nuberu-plugin-example-custom", # Example custom plugin (local)
+    "nuberu-plugin-custom-monitor", # Simple monitor plugin (local)
+    # TODO: Add any other general dependencies from PyPI if needed for your examples
+    # e.g., "pandas", "matplotlib"
+    "pydantic>=2.11.7",
+    "jinja2>=3.1.6",
+    "nuberu-plugin-report-generator",
+]
+
+[dependency-groups]
+dev = [
+    "numpy>=1.26,<2",
+    "pandas>=2.0.0",
+    "seaborn",
+    "matplotlib",
+    "pyarrow>=20.0.0",
+    "pytest>=8.4.1",
+]
+
+# This section tells 'uv' where to find specific versions or sources for the packages
+# listed in `[project.dependencies]` if they are not on PyPI or you need a specific version.
+[tool.uv.sources]
+nuberu = { path = "../../core", editable = true }
+nuberu-plugin-cost-spot = { path = "../../plugins/nuberu-plugin-cost-spot", editable=true }
+nuberu-plugin-load-balancer = { path = "../../plugins/nuberu-plugin-load-balancer", editable=true }
+nuberu-plugin-weighted-load-balancer = { path = "../../plugins/nuberu-plugin-weighted-load-balancer", editable=true }
+nuberu-plugin-smoothwrr-load-balancer = { path = "../../plugins/nuberu-plugin-smoothwrr-load-balancer", editable=true }
+nuberu-plugin-uniform-distribution = { path = "../../plugins/nuberu-plugin-uniform-distribution", editable=true }
+nuberu-plugin-poisson-distribution = { path = "../../plugins/nuberu-plugin-poisson-distribution", editable=true }
+nuberu-plugin-poisson-dynamic-distribution = { path = "../../plugins/nuberu-plugin-poisson-dynamic-distribution", editable=true }
+nuberu-plugin-conlloovia-data-provider = { path = "../../plugins/nuberu-plugin-conlloovia-data-provider", editable=true }
+nuberu-plugin-fcma-data-provider = { path = "../../plugins/nuberu-plugin-fcma-data-provider", editable=true }
+nuberu-plugin-runtime-model-simple = { path = "../../plugins/nuberu-plugin-runtime-model-simple", editable=true }
+nuberu-plugin-example-custom = { path = "../../plugins/nuberu-plugin-example-custom", editable=true }
+nuberu-plugin-custom-monitor = { path = "../../plugins/nuberu-plugin-custom-monitor", editable=true }
+nuberu-plugin-report-generator = { path = "../../plugins/nuberu-plugin-report-generator", editable = true }

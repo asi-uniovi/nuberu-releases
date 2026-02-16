@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nuberu-plugin-runtime-model-simple"
+version = "0.3.0"
+description = "Simple RuntimeModel plugin for nuberu"
+authors = [{ name = "Ruben", email = "luqueruben@uniovi.es" }]
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "nuberu",
+]
+
+[tool.uv.sources]
+nuberu = { workspace = true }
+
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.entry-points."nuberu"]
+"runtime_model.simple" = "nuberu_plugin_runtime_model_simple.plugin:RuntimeModelPlugin"

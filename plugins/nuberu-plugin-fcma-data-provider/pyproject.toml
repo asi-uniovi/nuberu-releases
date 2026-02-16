@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nuberu-plugin-fcma-data-provider"
+version = "0.2.0"
+description = "Data provider FCMA plugin for nuberu"
+authors = []
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "nuberu",
+    "fcma",
+]
+
+[tool.uv.sources]
+nuberu = { workspace = true }
+fcma = { git = "https://github.com/asi-uniovi/fcma.git", rev = "jld/feat-uv" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.entry-points."nuberu"]
+"infrastructure.fcma" = "nuberu_plugin_fcma_data_provider.plugin:DataProviderFromFcma"
+"allocation.fcma" = "nuberu_plugin_fcma_data_provider.plugin:DataProviderFromFcma"
+"performance.fcma" = "nuberu_plugin_fcma_data_provider.plugin:DataProviderFromFcma"
+"workload.fcma" = "nuberu_plugin_fcma_data_provider.plugin:DataProviderFromFcma"
+

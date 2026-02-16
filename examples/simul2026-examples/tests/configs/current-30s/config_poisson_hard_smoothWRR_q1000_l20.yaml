@@ -1,0 +1,88 @@
+config_version: "3.2"
+simulation:
+  seed: 12345
+  stop_time: 30
+  eager_start: true
+  drain_pending_requests: false
+
+# Network delays (v3.2) - configurable latencies between components
+# Set to 0 by default for baseline experiments (no network delay)
+network_delays:
+  wi_to_lb: 20
+  lb_to_vm_default: 20
+  vm_container_overhead: 1
+
+
+
+logging:
+  log_to_file: true
+  log_to_console: false
+  level: critical
+  component_levels:
+    plugins.monitor_simple: critical
+    plugins.report_generator: info
+    plugins.cost_spot: debug
+    components.monitor: critical
+  output_path: ../logs/
+  log_file_name: "log_poisson_hard_smoothWRR_q1000_l20.log"
+
+# Custom plugins (v3.2)
+# - monitor_simple: Dumps raw request events to JSONL (for post-hoc analysis)
+# - report_generator: Generates summary report at simulation end
+custom_plugins:
+  - plugin_name: monitor_simple
+    plugin_config:
+      dump_file: ../metrics/poisson_hard_smoothWRR_q1000_l20.jsonl
+
+  - plugin_name: report_generator
+    plugin_config:
+      output_format: "jsonl"
+      output_path: "../reports/poisson_hard_smoothWRR_q1000_l20_report"
+
+infrastructure:
+  plugin_name: conlloovia
+  plugin_config:
+    pickle_path: "../example/data/sol_conlloovia_1_hour_a_2_static_unpredictable_ts_9.p"
+
+runtime_model:
+  plugin_name: simple
+  plugin_config:
+    queue_size: 1000
+
+performance_data:
+  plugin_name: conlloovia
+  plugin_config:
+    pickle_path: "../example/data/sol_conlloovia_1_hour_a_2_static_unpredictable_ts_9.p"
+
+allocation:
+  plugin_name: "conlloovia"
+  plugin_config:
+    pickle_path: "../example/data/sol_conlloovia_1_hour_a_2_static_unpredictable_ts_9.p"
+
+workloads:
+
+  
+  - app: app0
+    distribution:
+      plugin_name: poisson
+      plugin_config:
+        num_reqs: 124427
+        time_slot_size: 3600
+  
+  - app: app1
+    distribution:
+      plugin_name: poisson
+      plugin_config:
+        num_reqs: 362587
+        time_slot_size: 3600
+  
+
+
+load_balancer:
+  plugin_name: "smoothWRR"
+  plugin_config: {}
+
+cost_models:
+  - plugin_name: "spot"
+    plugin_config:
+      price_per_hour: 0.05

@@ -1,0 +1,90 @@
+config_version: "3.2"
+simulation:
+  seed: 12345
+  stop_time: 30
+  eager_start: true
+  drain_pending_requests: true
+
+# Network delays (v3.2) - configurable latencies between components
+# Set to 0 by default for baseline experiments (no network delay)
+network_delays:
+  wi_to_lb: 0
+  lb_to_vm_default: 0
+  vm_container_overhead: 0
+
+
+
+logging:
+  log_to_file: true
+  log_to_console: false
+  level: critical
+  component_levels:
+    plugins.monitor_simple: critical
+    plugins.report_generator: info
+    plugins.cost_spot: debug
+    components.monitor: critical
+  output_path: ../logs/
+  log_file_name: "log_trace_drain_simple_q0.log"
+
+# Custom plugins (v3.2)
+# - monitor_simple: Dumps raw request events to JSONL (for post-hoc analysis)
+# - report_generator: Generates summary report at simulation end
+custom_plugins:
+  - plugin_name: monitor_simple
+    plugin_config:
+      dump_file: ../metrics/trace_drain_simple_q0.jsonl
+
+  - plugin_name: report_generator
+    plugin_config:
+      output_format: "jsonl"
+      output_path: "../reports/trace_drain_simple_q0_report"
+
+infrastructure:
+  plugin_name: conlloovia
+  plugin_config:
+    pickle_path: "../example/data/sol_conlloovia_1_hour_a_2_static_unpredictable_ts_9.p"
+
+runtime_model:
+  plugin_name: simple
+  plugin_config:
+    queue_size: 0
+
+performance_data:
+  plugin_name: conlloovia
+  plugin_config:
+    pickle_path: "../example/data/sol_conlloovia_1_hour_a_2_static_unpredictable_ts_9.p"
+
+allocation:
+  plugin_name: "conlloovia"
+  plugin_config:
+    pickle_path: "../example/data/sol_conlloovia_1_hour_a_2_static_unpredictable_ts_9.p"
+
+workloads:
+
+  
+  - app: app0
+    distribution:
+      plugin_name: poisson_dynamic
+      plugin_config:
+        rate_file_path: ../example/data/wl_static_1s.csv
+        injecting_end_time: 3600
+        csv_offset: 32400
+  
+  - app: app1
+    distribution:
+      plugin_name: poisson_dynamic
+      plugin_config:
+        rate_file_path: ../example/data/wl_unpredictable_1s.csv
+        injecting_end_time: 3600
+        csv_offset: 32400
+  
+
+
+load_balancer:
+  plugin_name: "simple"
+  plugin_config: {}
+
+cost_models:
+  - plugin_name: "spot"
+    plugin_config:
+      price_per_hour: 0.05
